@@ -17,16 +17,25 @@ def main():
     x =SCREEN_WIDTH / 2
     y = SCREEN_WIDTH / 2
 
+    
+
+    # create groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+
     player = Player(x,y)
 
     while True: # infinite while loop
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
             
         screen.fill("black")
-        player.draw(screen)
+        for d in drawable:
+            d.draw(screen)
+        updatable.update(dt)
         pygame.display.flip()
 
         
